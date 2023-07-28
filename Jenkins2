@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Clone the GitHub repository
+                git 'https://github.com/manasvi19/DotNetTest.git'
+            }
+        }
+
+        stage('Build and Run') {
+            steps {
+                // Define .NET environment (assuming you have .NET SDK installed on the Jenkins node)
+                // If necessary, you can install the .NET SDK using a separate script or by using a Docker image with .NET SDK.
+                sh 'dotnet --version' // Verify that .NET SDK is installed and accessible.
+
+                // Restore NuGet packages and build the .NET project
+                dir('helloworldapp') { // The relative path to your helloworldapp.csproj directory (no 'path/to/' needed)
+                    sh 'dotnet restore'
+                    sh 'dotnet run'
+                }
+            }
+        }
+    }
+}
