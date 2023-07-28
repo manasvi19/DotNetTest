@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         // Specify the .NET SDK version you want to use
-        dotnet '7.0.306'
+        dotnetsdk '7.0.306'
     }
 
     stages {
@@ -16,13 +16,13 @@ pipeline {
         stage('Restore') {
             steps {
                 // Restore the .NET project dependencies
-                sh 'dotnet restore ./program.cs'
+                sh 'dotnet restore'
             }
         }
         stage('Build') {
             steps {
                 // Build the .NET project
-                sh 'dotnet build ./program.cs'
+                sh 'dotnet build'
             }
         }
         stage('Run .NET Application') {
