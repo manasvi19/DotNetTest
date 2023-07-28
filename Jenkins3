@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    tools {
+        // Specify the .NET SDK version you want to use
+        dotnet '7.0.306'
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -8,10 +13,22 @@ pipeline {
                 git branch: 'main', credentialsId: '0eedeb9f-ba20-4fa4-ae88-893304aaeb8a', url: 'https://github.com/manasvi19/DotNetTest.git'
             }
         }
+        stage('Restore') {
+            steps {
+                // Restore the .NET project dependencies
+                sh 'dotnet restore ./helloworldapp.csproj'
+            }
+        }
+        stage('Build') {
+            steps {
+                // Build the .NET project
+                sh 'dotnet build ./helloworldapp.csproj'
+            }
+        }
         stage('Run .NET Application') {
             steps {
                 // Run the .NET application and capture the output
-                sh 'dotnet run'
+                sh 'dotnet run --project ./helloworldapp.csproj'
             }
         }
     }
