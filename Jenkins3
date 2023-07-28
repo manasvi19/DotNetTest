@@ -16,19 +16,19 @@ pipeline {
         stage('Restore') {
             steps {
                 // Restore the .NET project dependencies
-                sh 'dotnet restore ./helloworldapp.csproj'
+                sh 'dotnet restore ./program.cs'
             }
         }
         stage('Build') {
             steps {
                 // Build the .NET project
-                sh 'dotnet build ./helloworldapp.csproj'
+                sh 'dotnet build ./program.cs'
             }
         }
         stage('Run .NET Application') {
             steps {
                 // Run the .NET application and capture the output
-                sh 'dotnet run --project ./helloworldapp.csproj'
+                sh 'dotnet run --project ./program.cs'
             }
         }
     }
