@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         // Specify the .NET SDK version you want to use
-        dotnetsdk '7.0.306'
+        dotnet '7.0.306'
     }
 
     stages {
