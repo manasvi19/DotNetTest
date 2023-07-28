@@ -8,20 +8,12 @@ pipeline {
                 git branch: 'main', credentialsId: '0eedeb9f-ba20-4fa4-ae88-893304aaeb8a', url: 'https://github.com/manasvi19/DotNetTest.git'
             }
         }
-        stage('Build and Run .NET Application') {
+        stage('Run .NET Application') {
             steps {
-                // Use the dotnet command with the specified version
-                withDotNetTool('YOUR_DOTNET_SDK_VERSION') {
-                    // Restore the .NET project dependencies
-                    sh 'dotnet restore'
-
-                    // Build the .NET project
-                    sh 'dotnet build'
-
-                    // Run the .NET application and capture the output
-                    sh 'dotnet run --project ./program.cs'
-                }
+                // Run the .NET application and capture the output
+                sh 'dotnet run --project ./program.cs'
             }
         }
     }
 }
+
