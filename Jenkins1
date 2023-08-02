@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        NUGET_CACHE = '/Users/manasvidhankani/.nuget/packages/' // Replace with the actual path from Step 1
+        NUGET_CACHE = '/Users/manasvidhankani/.nuget/packages/' 
     }
 
     stages {
