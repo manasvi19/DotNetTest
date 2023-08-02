@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    environment {
+        NUGET_CACHE = '/Users/manasvidhankani/.nuget/packages/' // Replace with the actual path from Step 1
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the repository
+                git branch: 'main', credentialsId: '0eedeb9f-ba20-4fa4-ae88-893304aaeb8a', url: 'https://github.com/manasvi19/DotNetTest.git'
+            }
+        }
+        stage('Restore') {
+            steps {
+                // Restore the .NET project dependencies using the local NuGet cache
+                sh "dotnet restore --packages $NUGET_CACHE"
+            }
+        }
+        stage('Build') {
+            steps {
+                // Build the .NET project
+                sh 'dotnet build'
+            }
+        }
+        stage('Run .NET Application') {
+            steps {
+                // Run the .NET application and capture the output
+                sh 'dotnet run --project ./helloworldapp.csproj'
+            }
+        }
+    }
+}
